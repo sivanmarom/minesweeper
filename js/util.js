@@ -5,7 +5,7 @@ function renderBoard(board, selector) {
     var strHTML = '<table border="1"><tbody>'
     for (var i = 0; i < board.length; i++) {
 
-        strHTML += '<tr>'
+        strHTML += '<tr.style.width="200px" >'
         for (var j = 0; j < board[0].length; j++) {
 
             const cell = board[i][j]

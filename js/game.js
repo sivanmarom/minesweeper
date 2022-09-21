@@ -1,6 +1,6 @@
 'use strict'
 
-const START_EMOJI = '🙂'
+const RESTART_EMOJI = '🙂'
 const LOSE_EMOJI = '😭'
 const WIN_EMOJI = '🥳'
 
@@ -13,48 +13,48 @@ var gGame = {
     shownCount: 0,
     markedCount: 0,
     secsPassed: 0
-   }
+}
 
 
-var gcell ={ minesAroundCount: 0,
+var gcell = {
+    minesAroundCount: 4,
     isShown: true,
     isMine: false,
     isMarked: true,
     cellContent: EMPTY
-   }
+}
 
-   var gLevel = {
+var gLevel = {
     size: 4,
     mines: 2
-   }
+}
 
 function initGame() {
     gBoard = buildBoard()
     console.log(gBoard)
-    renderBoard(gBoard,'.board-container')
+    renderBoard(gBoard, '.board-container')
+    gGame.isOn = true
 }
 
 function buildBoard() {
     const size = gLevel.size
-    var board =[]
-    for(var i= 0; i<size; i++){
-    board.push([])
-    for(var j= 0; j<size; j++){
-        if(i ===3 && j===1 ||
-            i ===1 && j ===2) {
-                gcell.isMine = true
-                gcell.cellContent =MINE
-            }
-            else
-            board[i][j]=gcell.cellContent
+    var board = []
+    for (var i = 0; i < size; i++) {
+        board.push([])
+        for (var j = 0; j < size; j++) {
+            board[i][j] = gcell.cellContent
+        }
     }
+    board[1][1] = MINE
+    board[3][2] = MINE
+    return board
 }
-return board
-}
+
 
 //Count mines around each cell and set the cell's minesAroundCount.
 
 function setMinesNegsCount(board) {
+
 
 }
 
