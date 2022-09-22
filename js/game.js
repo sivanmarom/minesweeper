@@ -15,8 +15,6 @@ var gGame = {
     secsPassed: 0
 }
 
-
-
 var gLevel = {
     size: 4,
     mines: 2
@@ -35,53 +33,53 @@ function buildBoard() {
     for (var i = 0; i < size; i++) {
         board.push([])
         for (var j = 0; j < size; j++) {
-            var cell = {
-                minesAroundCount: setMinesNegsCount(),
+            board[i][j] = {
+                minesAroundCount: setMinesNegsCount(i, j),
                 isShown: false,
                 isMine: false,
                 isMarked: false,
             }
-            board[i][j] =cell
         }
     }
     board[1][1] = {
-        minesAroundCount: setMinesNegsCount(),
+        minesAroundCount: setMinesNegsCount(1, 1),
         isShown: false,
         isMine: true,
         isMarked: false,
     }
     board[3][2] = {
-        minesAroundCount: setMinesNegsCount(),
+        minesAroundCount: setMinesNegsCount(3, 2),
         isShown: false,
         isMine: true,
         isMarked: false,
     }
-
-
 
     return board
 }
 
 
 //Count mines around each cell and set the cell's minesAroundCount.
-function setMinesNegsCount(){
+function setMinesNegsCount() {
     return 4
 }
 
-// function setMinesNegsCount1() {
-//     var minesNegsCount =0 
-//     var currCell
-//     for (var i = i - 1; i <= i + 1; i++) {
-//         if (i < 0 || i >= gBoard.length) continue
-//         for (var j = j - 1; j <= j + 1; j++) {
-//             if (i === j && j === j) continue
-//             if (j < 0 || j >= gBoard[0].length) continue
-//             currCell = gBoard[i][j]
-//             if (currCell === MINE) minesNegsCount ++
-// currCell.minesAroundCount = minesNegsCount
-//     }   
-// }
-// }
+function setMinesNegsCount1(rowIdx, colIdx) {
+    var count = 0
+    for (var i = rowIdx - 1; i <= rowIdx + 1; i++) {
+        if (i < 0 || i >= gBoard.length) continue
+        for (var j = colIdx - 1; j <= colIdx + 1; j++) {
+            if (i === rowIdx && j === colIdx) continue
+            if (j < 0 || j >= gBoard[0].length) continue
+            var currCell = gBoard[rowIdx][colIdx]
+            if (currCell=== MINE) {
+                count++
+            }
+        }
+    }
+return count
+
+    }
+
 
 
 
