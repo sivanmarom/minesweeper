@@ -1,17 +1,26 @@
 'use strict'
 
 function renderBoard(board, selector) {
-
+var cellContent
     var strHTML = '<table border="1"><tbody>'
     for (var i = 0; i < board.length; i++) {
 
-        strHTML += '<tr.style.width="200px" >'
+        strHTML += '<tr>'
         for (var j = 0; j < board[0].length; j++) {
 
             const cell = board[i][j]
-            const className = `cell cell-${i}-${j}`
+            if(cell.isMine){
+                cellContent =MINE
+            }
+            else if(cell.minesAroundCount){
+                cellContent =cell.minesAroundCount
+            }
+            else cellContent = ''
 
-            strHTML += `<td class="${className}">${cell}</td>`
+            const className = `cell cell-${i}-${j}`
+            // cellContent= (cell.isShown)? cellContent: ''  
+
+            strHTML += `<td class="${className}" style="width:200px; height:200px">${cellContent}</td>`
         }
         strHTML += '</tr>'
     }
@@ -21,12 +30,12 @@ function renderBoard(board, selector) {
     elContainer.innerHTML = strHTML
 }
 
-// // location is an object like this - { i: 2, j: 7 }
-// function renderCell(location, value) {
-//     // Select the elCell and set the value
-//     const elCell = document.querySelector(`.cell-${location.i}-${location.j}`)
-//     elCell.innerHTML = value
-// }
+// Select the elCell and set the value
+// location is an object like this - { i: 2, j: 7 }
+function renderCell(location, value) {
+    const elCell = document.querySelector(`.cell-${location.i}-${location.j}`)
+    elCell.innerHTML = value
+}
 
 function getRandomInt(min, max) {
     return Math.floor(Math.random() * (max - min)) + min

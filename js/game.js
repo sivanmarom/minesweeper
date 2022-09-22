@@ -16,13 +16,6 @@ var gGame = {
 }
 
 
-var gcell = {
-    minesAroundCount: 4,
-    isShown: true,
-    isMine: false,
-    isMarked: true,
-    cellContent: EMPTY
-}
 
 var gLevel = {
     size: 4,
@@ -42,27 +35,53 @@ function buildBoard() {
     for (var i = 0; i < size; i++) {
         board.push([])
         for (var j = 0; j < size; j++) {
-            board[i][j] = gcell.cellContent
+            var cell = {
+                minesAroundCount: setMinesNegsCount(),
+                isShown: false,
+                isMine: false,
+                isMarked: false,
+            }
+            board[i][j] =cell
         }
     }
-    board[1][1] = MINE
-    board[3][2] = MINE
+    board[1][1] = {
+        minesAroundCount: setMinesNegsCount(),
+        isShown: false,
+        isMine: true,
+        isMarked: false,
+    }
+    board[3][2] = {
+        minesAroundCount: setMinesNegsCount(),
+        isShown: false,
+        isMine: true,
+        isMarked: false,
+    }
+
+
+
     return board
 }
 
 
 //Count mines around each cell and set the cell's minesAroundCount.
-
-function setMinesNegsCount(board) {
-
-
+function setMinesNegsCount(){
+    return 4
 }
 
-
-
-
-
-
+// function setMinesNegsCount1() {
+//     var minesNegsCount =0 
+//     var currCell
+//     for (var i = i - 1; i <= i + 1; i++) {
+//         if (i < 0 || i >= gBoard.length) continue
+//         for (var j = j - 1; j <= j + 1; j++) {
+//             if (i === j && j === j) continue
+//             if (j < 0 || j >= gBoard[0].length) continue
+//             currCell = gBoard[i][j]
+//             if (currCell === MINE) minesNegsCount ++
+// currCell.minesAroundCount = minesNegsCount
+//     }   
+// }
+// }
 
 
 
