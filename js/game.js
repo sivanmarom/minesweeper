@@ -6,7 +6,7 @@ const WIN_EMOJI = '🥳'
 
 const MINE = '💣' // (1,1)(1,2)
 const EMPTY = ''
-var gBoard
+var gBoard =[]
 
 var gGame = {
     isOn: false,
@@ -21,64 +21,60 @@ var gLevel = {
 }
 
 function initGame() {
-    gBoard = buildBoard()
-    console.log(gBoard)
+     buildBoard()
     renderBoard(gBoard, '.board-container')
     gGame.isOn = true
 }
 
-function buildBoard() {
+function buildBoard(){
+initBoard()
+setMines()
+setMinesNegsCount()
+}
+
+function initBoard() {
     const size = gLevel.size
-    var board = []
     for (var i = 0; i < size; i++) {
-        board.push([])
+        gBoard.push([])
         for (var j = 0; j < size; j++) {
-            board[i][j] = {
-                minesAroundCount: setMinesNegsCount(i, j),
+           gBoard[i].push({
+                minesAroundCount: 0,
                 isShown: false,
                 isMine: false,
                 isMarked: false,
-            }
+            }      )
         }
     }
-    board[1][1] = {
-        minesAroundCount: setMinesNegsCount(1, 1),
-        isShown: false,
-        isMine: true,
-        isMarked: false,
-    }
-    board[3][2] = {
-        minesAroundCount: setMinesNegsCount(3, 2),
-        isShown: false,
-        isMine: true,
-        isMarked: false,
-    }
-
-    return board
 }
 
+function setMines(){
+    gBoard[1][1].isMine =true
+    gBoard[3][2].isMine = true
 
+}
 //Count mines around each cell and set the cell's minesAroundCount.
 function setMinesNegsCount() {
-    return 4
-}
-
-function setMinesNegsCount1(rowIdx, colIdx) {
-    var count = 0
-    for (var i = rowIdx - 1; i <= rowIdx + 1; i++) {
-        if (i < 0 || i >= gBoard.length) continue
-        for (var j = colIdx - 1; j <= colIdx + 1; j++) {
-            if (i === rowIdx && j === colIdx) continue
-            if (j < 0 || j >= gBoard[0].length) continue
-            var currCell = gBoard[rowIdx][colIdx]
-            if (currCell=== MINE) {
-                count++
+    for (var rowIdx = 0; rowIdx < gLevel.size; rowIdx++) {
+        for (var colIdx = 0; colIdx < gLevel.size; colIdx++) {
+            var count = 0
+            for (var i = rowIdx - 1; i <= rowIdx + 1; i++) {
+                if (i < 0 || i >= gLevel.size) continue
+                for (var j = colIdx - 1; j <= colIdx + 1; j++) {
+                    if (i === rowIdx && j === colIdx) continue
+                    if (j < 0 || j >= gLevel.size) continue
+                    var currCell = gBoard[i][j]
+                    if (currCell.isMine) {
+                        count++
+                    }
+                }
             }
+         gBoard[rowIdx][colIdx].minesAroundCount =count
         }
     }
-return count
+}
 
-    }
+
+
 
 
 

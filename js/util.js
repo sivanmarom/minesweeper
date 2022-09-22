@@ -20,7 +20,7 @@ var cellContent
             const className = `cell cell-${i}-${j}`
             // cellContent= (cell.isShown)? cellContent: ''  
 
-            strHTML += `<td class="${className}" style="width:200px; height:200px">${cellContent}</td>`
+            strHTML += `<td class="${className}" onclick="cellClicked(this,${i},${j})" style="width:200px; height:200px">${cellContent}</td>`
         }
         strHTML += '</tr>'
     }
@@ -28,6 +28,11 @@ var cellContent
 
     const elContainer = document.querySelector(selector)
     elContainer.innerHTML = strHTML
+}
+
+function cellClicked(ellCell,i,j){
+    const cell =gBoard[i][j]
+    console.log(ellCell,i,j)
 }
 
 // Select the elCell and set the value
@@ -49,3 +54,4 @@ function getRandomColor() {
     }
     return color;
 }
+
