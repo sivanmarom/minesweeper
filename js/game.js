@@ -73,9 +73,15 @@ function setMinesNegsCount() {
     }
 }
 
+function cellClicked(elCell,i,j){
+    const cell = gBoard[i][j]
+    var cellLocation ={i:i,j:j}
+    if(cell.minesAroundCount) {cell.isShown =true
+//  console.log(elCell,cellLocation,i,j)
+renderCell(cellLocation,cell.minesAroundCount)}
 
 
-
+}
 
 
 

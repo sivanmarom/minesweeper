@@ -18,7 +18,7 @@ var cellContent
             else cellContent = ''
 
             const className = `cell cell-${i}-${j}`
-            // cellContent= (cell.isShown)? cellContent: ''  
+            cellContent= (cell.isShown)? cellContent: ''  
 
             strHTML += `<td class="${className}" onclick="cellClicked(this,${i},${j})" style="width:200px; height:200px">${cellContent}</td>`
         }
@@ -30,16 +30,15 @@ var cellContent
     elContainer.innerHTML = strHTML
 }
 
-function cellClicked(ellCell,i,j){
-    const cell =gBoard[i][j]
-    console.log(ellCell,i,j)
-}
 
-// Select the elCell and set the value
-// location is an object like this - { i: 2, j: 7 }
 function renderCell(location, value) {
-    const elCell = document.querySelector(`.cell-${location.i}-${location.j}`)
-    elCell.innerHTML = value
+	var cellSelector = '.' + getClassName(location) // .cell-3-5
+	var elCell = document.querySelector(cellSelector) // <td></td>
+	elCell.innerHTML = value
+}
+function getClassName(location) {
+    var cellClass = 'cell-' + location.i + '-' + location.j
+    return cellClass
 }
 
 function getRandomInt(min, max) {
@@ -54,4 +53,5 @@ function getRandomColor() {
     }
     return color;
 }
+
 
