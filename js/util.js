@@ -9,18 +9,24 @@ var cellContent
         for (var j = 0; j < board[0].length; j++) {
 
             const cell = board[i][j]
+            var cellClass = getClassName({i:i,j:j})
             if(cell.isMine){
                 cellContent =MINE
+                cellClass+='mine'
             }
             else if(cell.minesAroundCount){
                 cellContent =cell.minesAroundCount
+                cellClass+='number of mines around'
             }
-            else cellContent = ''
+            else {
+                cellContent = ''
+                cellClass+='empty'
 
-            const className = `cell cell-${i}-${j}`
+            }
+            const className = `cell cell-${i}-${j}` 
             cellContent= (cell.isShown)? cellContent: ''  
 
-            strHTML += `<td class="${className}" onclick="cellClicked(this,${i},${j})" style="width:200px; height:200px">${cellContent}</td>`
+            strHTML += `<td class="${className}" onclick="cellClicked(this,${i},${j})" oncontextmenu="cellMarked(this,${i},${j})" style="width:200px; height:200px">${cellContent}</td>`
         }
         strHTML += '</tr>'
     }

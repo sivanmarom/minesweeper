@@ -1,16 +1,10 @@
 body{
-    background-color: rgb(151, 151, 180);
+    background-color: rgb(238, 212, 247);
     text-align: center;
 }
-/* 
-.board-container{
-    height: 400px;
-    width: 400px;
-    display: flex;
-    flex-wrap: wrap;
-} */
 
 table {
+    margin: auto;
     border-spacing: 10px;
 }
 
